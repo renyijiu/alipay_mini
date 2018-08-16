@@ -1,4 +1,4 @@
-require 'singleton'
+require "singleton"
 
 module AlipayMini
   class Config
@@ -30,9 +30,7 @@ module AlipayMini
 
 
     def configuration
-      setting = {}
-
-      setting.tap do |config|
+      @config ||= {}.tap do |config|
         config[:url] = url if url
         config[:app_id] = app_id if app_id
         config[:private_key] = private_key if private_key

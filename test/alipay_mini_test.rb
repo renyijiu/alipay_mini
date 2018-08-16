@@ -1,9 +1,11 @@
-require 'openssl'
-require 'test_helper'
+require "openssl"
+require "test_helper"
 
 class AlipayMiniTest < Minitest::Test
 
   def setup
+    Singleton.__init__(AlipayMini::Config)
+
     @url = 'https://renyijiu.com'
     @app_id = '2015102700040153'
     @private_key = OpenSSL::PKey::RSA.new(2048)
