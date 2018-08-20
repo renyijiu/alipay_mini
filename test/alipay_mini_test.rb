@@ -8,8 +8,10 @@ class AlipayMiniTest < Minitest::Test
 
     @url = 'https://renyijiu.com'
     @app_id = '2015102700040153'
-    @private_key = OpenSSL::PKey::RSA.new(2048)
-    @public_key = @private_key.public_key.export
+
+    pkey = OpenSSL::PKey::RSA.new(2048)
+    @private_key = remove_start_end_for_key(pkey.to_s)
+    @public_key = remove_start_end_for_key(pkey.public_key.export)
 
     AlipayMini.configure do |c|
       c.url = @url
@@ -33,8 +35,8 @@ class AlipayMiniTest < Minitest::Test
   def test_get_config_value
     assert_equal @url, AlipayMini.config[:url]
     assert_equal @app_id, AlipayMini.config[:app_id]
-    assert_equal @private_key, AlipayMini.config[:private_key]
-    assert_equal @public_key, AlipayMini.config[:public_key]
+    assert_equal add_start_end_for_private_key(@private_key), AlipayMini.config[:private_key]
+    assert_equal add_start_end_for_public_key(@public_key), AlipayMini.config[:public_key]
 
     assert_equal '1.0', AlipayMini.config[:version]
     assert_equal 'JSON', AlipayMini.config[:format]

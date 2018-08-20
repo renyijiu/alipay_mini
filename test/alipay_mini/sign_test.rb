@@ -29,7 +29,7 @@ class AlipayMini::SignTest < Minitest::Test
 
   def test_verify_rsa2_sign
     assert AlipayMini::Sign.verify?(@params.merge(sign_type: @rsa2_type, sign: @res_sign))
-    assert AlipayMini::Sign.verify?(@params.merge(sign_type: @rsa2_type, sign: @res_sign), public_key: TEST_RSA2_PUBLIC_KEY)
+    assert AlipayMini::Sign.verify?(@params.merge(sign_type: @rsa2_type, sign: @res_sign), public_key: add_start_end_for_public_key(TEST_RSA2_PUBLIC_KEY))
   end
 
   def test_verify_rsa2_sign_failed

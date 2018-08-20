@@ -33,14 +33,24 @@ module AlipayMini
       @config ||= {}.tap do |config|
         config[:url] = url if url
         config[:app_id] = app_id if app_id
-        config[:private_key] = private_key if private_key
-        config[:public_key] = public_key if public_key
+        config[:private_key] = format_private_key(private_key) if private_key
+        config[:public_key] = format_public_key(public_key) if public_key
 
         config[:version] = '1.0'
         config[:format] = format || 'JSON'
         config[:charset] = charset || 'utf-8'
         config[:sign_type] = sign_type || 'RSA2'
       end
+    end
+
+    private
+
+    def format_private_key(key)
+      "-----BEGIN RSA PRIVATE KEY-----\n#{key}\n-----END RSA PRIVATE KEY-----\n"
+    end
+
+    def format_public_key(key)
+      "-----BEGIN PUBLIC KEY-----\n#{key}\n-----END PUBLIC KEY-----\n"
     end
 
   end
