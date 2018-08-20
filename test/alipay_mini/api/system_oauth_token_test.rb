@@ -24,7 +24,7 @@ class AlipayMini::Api::SystemOauthTokenTest < Minitest::Test
             "hello" => "world"
         }
     }
-    sign = AlipayMini::Sign.generate(mock_res["alipay_system_oauth_token_response"])
+    sign = test_generate_json_sign(mock_res["alipay_system_oauth_token_response"])
     stub_request(:get, /https:\/\/openapi\.alipaydev\.com\/gateway\.do/).to_return(body: mock_res.merge(sign: sign).to_json)
 
     flag, res = AlipayMini.system_oauth_token('authorization_code', 'test')
@@ -39,7 +39,7 @@ class AlipayMini::Api::SystemOauthTokenTest < Minitest::Test
             "hello" => "world"
         }
     }
-    sign = AlipayMini::Sign.generate(mock_res["alipay_system_oauth_token_response"])
+    sign = test_generate_json_sign(mock_res["alipay_system_oauth_token_response"])
     stub_request(:get, /https:\/\/openapi\.alipaydev\.com\/gateway\.do/).to_return(body: mock_res.merge(sign: sign).to_json)
 
     flag, res = AlipayMini.system_oauth_token('refresh_token', 'test')

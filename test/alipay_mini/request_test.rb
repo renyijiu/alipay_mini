@@ -44,7 +44,8 @@ class AlipayMini::RequestTest < Minitest::Test
   end
 
   def test_get_sign_error
-    sign = AlipayMini::Sign.generate(@params.merge('test' => 'renyijiu'))
+    sign = test_generate_json_sign(@params.merge('test' => 'renyijiu'))
+
     stub_request(:get, @url).with(query: @params)
         .to_return(body: {'system_oauth_token_response' => @params, sign: sign}.to_json, status: 200)
 
@@ -55,7 +56,8 @@ class AlipayMini::RequestTest < Minitest::Test
   end
 
   def test_get_error_response
-    sign = AlipayMini::Sign.generate(@params)
+    sign = test_generate_json_sign(@params)
+
     stub_request(:get, @url).with(query: @params)
         .to_return(body: {'error_response' => @params, sign: sign}.to_json, status: 200)
 
@@ -66,7 +68,8 @@ class AlipayMini::RequestTest < Minitest::Test
   end
 
   def test_get_right_data
-    sign = AlipayMini::Sign.generate(@params)
+    sign = test_generate_json_sign(@params)
+
     stub_request(:get, @url).with(query: @params)
         .to_return(body: {'system_oauth_token_response' => @params, sign: sign}.to_json, status: 200)
 

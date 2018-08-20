@@ -24,7 +24,7 @@ module AlipayMini
       sign = params.delete('sign')
       public_key = options[:public_key] || AlipayMini.config[:public_key]
 
-      string = Utils.params_to_string(params)
+      string = params.to_json
 
       case sign_type
       when 'RSA2'
