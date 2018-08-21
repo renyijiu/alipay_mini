@@ -3,21 +3,7 @@ require "test_helper"
 class AlipayMini::RequestTest < Minitest::Test
 
   def setup
-    Singleton.__init__(AlipayMini::Config)
-
-    @url = "https://openapi.alipaydev.com/gateway.do"
-    @app_id = '2015102700040153'
-
-    pkey = OpenSSL::PKey::RSA.new(2048)
-    @private_key = remove_start_end_for_key(pkey.to_s)
-    @public_key = remove_start_end_for_key(pkey.public_key.export)
-
-    AlipayMini.configure do |c|
-      c.url = @url
-      c.app_id = @app_id
-      c.private_key = @private_key
-      c.public_key = @public_key
-    end
+    init_alipaymini_config
 
     @params = {
         hello: 'world',
