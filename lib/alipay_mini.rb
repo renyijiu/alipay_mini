@@ -4,6 +4,7 @@ require "alipay_mini/utils"
 require "alipay_mini/sign/rsa2"
 require "alipay_mini/sign"
 require "alipay_mini/request"
+require "alipay_mini/api/alipay_base"
 require "alipay_mini/api/system_oauth_token"
 require "alipay_mini/api/user_info_share"
 

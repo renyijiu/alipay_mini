@@ -1,8 +1,9 @@
 module AlipayMini
   module Api
-    class SystemOauthToken
+    class SystemOauthToken < AlipayBase
+
       # when grant_type is 'authorization_code', code is the auth_code
-      # when grant_type is 'refresh_token', code is the refresh_tok``en
+      # when grant_type is 'refresh_token', code is the refresh_token
       def get(grant_type, code)
         case grant_type
         when 'authorization_code'
@@ -20,26 +21,6 @@ module AlipayMini
 
       def method
         "alipay.system.oauth.token"
-      end
-
-      def timestamp
-        Time.now.strftime("%Y-%m-%d %H:%M:%S")
-      end
-
-      def base_params
-        {
-            app_id: AlipayMini.config[:app_id],
-            method: method,
-            format: AlipayMini.config[:format],
-            charset: AlipayMini.config[:charset],
-            sign_type: AlipayMini.config[:sign_type],
-            timestamp: timestamp,
-            version: AlipayMini.config[:version]
-        }
-      end
-
-      def sign_params(params)
-        params.merge(sign: AlipayMini::Sign.generate(params))
       end
 
     end
