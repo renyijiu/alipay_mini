@@ -24,7 +24,8 @@ module AlipayMini
       sign = params.delete('sign')
       public_key = options[:public_key] || AlipayMini.config[:public_key]
 
-      string = params.to_json
+      # 转义正斜杠，防止验签无法通过
+      string = params.to_json.gsub('/', '\/')
 
       case sign_type
       when 'RSA2'

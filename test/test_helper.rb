@@ -17,7 +17,7 @@ def test_generate_json_sign(params, options = {})
 
   # 正常签名使用 Utils.params_to_string(params)处理
   # 而验签时采用 params.to_json 进行处理
-  string = params.to_json
+  string = params.to_json.gsub('/', '\/')
 
   case sign_type
     when 'RSA2'
