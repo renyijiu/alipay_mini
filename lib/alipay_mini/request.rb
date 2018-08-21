@@ -29,7 +29,9 @@ module AlipayMini
         verify = AlipayMini::Sign.verify?(body.merge(sign_params))
         return [false, 'Sign error'] unless verify
 
-        [method_key != "error_response", body]
+        # 支付宝部分返回值与文档不一致，采取code判断，默认请求成功
+        code = body.fetch("code", "10000")
+        [code == "10000", body]
       end
     end
   end

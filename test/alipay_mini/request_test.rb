@@ -44,12 +44,13 @@ class AlipayMini::RequestTest < Minitest::Test
   end
 
   def test_get_error_response
-    sign = test_generate_json_sign(@params)
+    params = @params.merge("code" => "40002")
+    sign = test_generate_json_sign(params)
 
-    stub_request(:get, @url).with(query: @params)
-        .to_return(body: {'error_response' => @params, sign: sign}.to_json, status: 200)
+    stub_request(:get, @url).with(query: params)
+        .to_return(body: {'error_response' => params, sign: sign}.to_json, status: 200)
 
-    flag, res = AlipayMini::Request.get('system.oauth.token', @params)
+    flag, res = AlipayMini::Request.get('system.oauth.token', params)
 
     assert_equal false, flag
     assert res.is_a? ::Hash
@@ -64,6 +65,19 @@ class AlipayMini::RequestTest < Minitest::Test
     flag, res = AlipayMini::Request.get('system.oauth.token', @params)
 
     assert_equal true, flag
+    assert res.is_a? ::Hash
+  end
+
+  def test_get_false_res_with_code
+    params = @params.merge("code" => "40002")
+    sign = test_generate_json_sign(params)
+
+    stub_request(:get, @url).with(query: params)
+        .to_return(body: {'system_oauth_token_response' => params, sign: sign}.to_json, status: 200)
+
+    flag, res = AlipayMini::Request.get('system.oauth.token', params)
+
+    assert_equal false, flag
     assert res.is_a? ::Hash
   end
 end

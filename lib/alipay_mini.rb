@@ -21,11 +21,20 @@ module AlipayMini
     end
 
     # alipay.system.oauth.token api
+    #
+    # @params grant_type String 'authorization_code', 'refresh_token'
+    # @params code String auth_code or refresh_token
+    #
+    # @return Array [flag<Boolean>, res<Hash>]
     def system_oauth_token(grant_type, code)
       AlipayMini::Api::SystemOauthToken.new.get(grant_type, code)
     end
 
     # alipay.user.info.share api
+    #
+    # @params access_token String access_token
+    #
+    # @return Array [flag<Boolean>, res<Hash>]
     def user_info_share(access_token)
       AlipayMini::Api::UserInfoShare.new.get(access_token)
     end
