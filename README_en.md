@@ -2,35 +2,31 @@
 [![Gem Version](https://badge.fury.io/rb/alipay_mini.svg)](https://badge.fury.io/rb/alipay_mini)
 [![Maintainability](https://api.codeclimate.com/v1/badges/38ee73000994e3721c04/maintainability)](https://codeclimate.com/github/renyijiu/alipay_mini/maintainability)
 
-[English](https://github.com/renyijiu/alipay_mini/blob/master/README_en.md)
-
 # AlipayMini
 
-一个非官方的支付宝小程序相关的gem包。
+An unofficial simple gem for alipay mini program. 
 
-由于官方未提供Ruby版本的服务端SDK，所以对于小程序开放的接口进行Ruby版本的封装。
+## Installation
 
-## 安装
-
-在Gemfile中添加下列命令：
+Add this line to your application's Gemfile:
 
 ```ruby
 gem 'alipay_mini', '~> 0.1.0'
 ```
 
-执行下列命令：
+And then execute:
 
     $ bundle
 
-或者通过命令行安装gem：
+Or install it yourself as:
 
     $ gem install alipay_mini
 
-## 使用
+## Usage
 
-### Config配置
+### Config
 
-首先配置的初始选项
+Setup the config first.
 
 ```ruby
 AlipayMini.configure do |c|
@@ -40,10 +36,9 @@ AlipayMini.configure do |c|
    c.app_id = "your own app_id"
 end
 ```
+> Attention: the public key is alipay's official public key!!!
 
-> 注意⚠️: public_key 为支付宝官方的公钥，不要填错了！！！
-
-示例：
+Config example:
 
 ```ruby
 AlipayMini.configure do |c|
@@ -102,15 +97,13 @@ AlipayMini.user_info_share(access_token)
 # 
 ```
 
-## 进度
+## Schedule
 
-### 已完成
+### Done
+1. [alipay.user.info.share](https://docs.open.alipay.com/api_9/alipay.system.oauth.token)
+2. [alipay.user.info.share](https://docs.open.alipay.com/api_2/alipay.user.info.share)
 
-1. [换取授权访问令牌](https://docs.open.alipay.com/api_9/alipay.system.oauth.token)(alipay.user.info.share)
-2. [支付宝会员授权信息查询接口](https://docs.open.alipay.com/api_2/alipay.user.info.share)(alipay.user.info.share)
-
-
-## 如何贡献
+## Contributing
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
@@ -118,4 +111,4 @@ AlipayMini.user_info_share(access_token)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
-欢迎贡献相关代码或是提交你的使用反馈👏，另外请记得为你的代码编写测试。
+Bug report or pull request are welcome. Please write unit test with your code if necessary
