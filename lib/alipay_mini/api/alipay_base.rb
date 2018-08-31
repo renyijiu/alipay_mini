@@ -3,7 +3,7 @@ module AlipayMini
     class AlipayBase
 
       def method
-        raise ArrgumentError, "please set the correct api method name"
+        raise ArgumentError, "please set the correct api method name"
       end
 
       def timestamp
