@@ -21,6 +21,16 @@ module AlipayMini
       Config.instance.configuration
     end
 
+    # synchronize notify verify sign
+    def verify?(params, options = {})
+      AlipayMini::Sign.verify?(params, options)
+    end
+
+    # asynchronous notify verify sign
+    def async_verify?(params, options = {})
+      AlipayMini::Sign.async_verify?(params, options)
+    end
+
     # alipay.system.oauth.token api
     #
     # @params grant_type String 'authorization_code', 'refresh_token'

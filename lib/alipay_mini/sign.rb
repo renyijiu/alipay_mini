@@ -33,8 +33,24 @@ module AlipayMini
       else
         false
       end
+    end
 
+    def self.async_verify?(params, options = {})
+      params = Utils.stringify_keys(params)
 
+      sign_type = params.fetch('sign_type')
+      sign = params.delete('sign')
+      public_key = options[:public_key] || AlipayMini.config[:public_key]
+      params.delete('sign_type') if options.fetch(:delete_sign_type, true)
+
+      string = AlipayMini::Utils.params_to_string(params)
+
+      case sign_type
+      when 'RSA2'
+        RSA2.verify?(public_key, string, sign)
+      else
+        false
+      end
     end
 
   end
