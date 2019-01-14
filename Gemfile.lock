@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    alipay_mini (0.1.0)
+    alipay_mini (0.1.1)
 
 GEM
   remote: https://gems.ruby-china.com/
@@ -31,4 +31,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
