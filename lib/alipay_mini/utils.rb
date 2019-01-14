@@ -15,6 +15,16 @@ module AlipayMini
       params.sort.map{ |item| item.join('=') }.join('&')
     end
 
+    def self.deep_compact(hash)
+      return hash unless hash.is_a?(::Hash)
 
+      hash.each_with_object({}) do |(k, v), compact_hash|
+        if v.is_a?(::Hash)
+          compact_hash[k] = deep_compact(v)
+        else
+          compact_hash[k] = v unless v.nil?
+        end
+      end
+    end
   end
 end

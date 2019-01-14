@@ -20,5 +20,32 @@ class AlipayMini::UtilsTest < Minitest::Test
     assert_equal string, AlipayMini::Utils.params_to_string(params)
   end
 
+  def test_compact_hash
+    hash = {
+        1 => nil,
+        2 => 'hello',
+        3 => 'world',
+    }
+
+    res = AlipayMini::Utils.deep_compact(hash)
+    assert_equal 2, res.keys.count
+  end
+
+  def test_deep_compact_hash
+    hash = {
+        1 => 'hello',
+        2 => {
+            3 => nil,
+            5 => 'world',
+            6 => {
+                7 => nil,
+                8 => 'world'
+            }
+        }
+    }
+
+    res = AlipayMini::Utils.deep_compact(hash)
+    assert_equal 2, res[2].keys.count
+  end
 end
 

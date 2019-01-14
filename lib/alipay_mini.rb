@@ -7,6 +7,7 @@ require "alipay_mini/request"
 require "alipay_mini/api/alipay_base"
 require "alipay_mini/api/system_oauth_token"
 require "alipay_mini/api/user_info_share"
+require "alipay_mini/api/trade_create"
 
 module AlipayMini
 
@@ -37,6 +38,19 @@ module AlipayMini
     # @return Array [flag<Boolean>, res<Hash>]
     def user_info_share(access_token)
       AlipayMini::Api::UserInfoShare.new.get(access_token)
+    end
+
+    # https://docs.open.alipay.com/api_1/alipay.trade.create
+    # alipay.trade_create
+    #
+    # @params trade_no String length < 64, only letter, number, underline
+    # @params amount Price Accurate to two decimal places, the range of values [0.01,100000000]
+    # @params subject String the title of order
+    # @params buyer_id String the user id of taobao
+    #
+    # @return Array [flag<Boolean>, res<Hash>]
+    def trade_create(trade_no, amount, subject, buyer_id, options = {})
+      AlipayMini::Api::TradeCreate.new.get(trade_no, amount, subject, buyer_id, options)
     end
   end
 
